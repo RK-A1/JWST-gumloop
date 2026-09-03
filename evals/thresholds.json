@@ -1,0 +1,28 @@
+{
+  "$comment": [
+    "The quality contract, as a reviewable file. Changing a limit here is a",
+    "diff someone approves, not a number edited in a dashboard.",
+    "",
+    "'floor' is an absolute minimum every run must clear.",
+    "'maxRegression' is how far a check may fall against the baseline run,",
+    "as an absolute drop in the 0-1 score.",
+    "",
+    "answer_accuracy and aggregate_discipline are held tight, because for",
+    "those an absolute number means something: a count that does not match",
+    "the warehouse is wrong at any threshold.",
+    "",
+    "query_efficiency deliberately has NO floor. It rewards running fewer",
+    "queries, so a floor would push toward exactly the behaviour the other",
+    "two exist to prevent. It is gated on regression only and read beside",
+    "them, never instead of them.",
+    "",
+    "Set these from a measured baseline before trusting them. Run",
+    "v1-grounded first and adjust — a floor guessed before any run tests the",
+    "fixture rather than the agent."
+  ],
+  "gates": {
+    "answer_accuracy": { "floor": 0.9, "maxRegression": 0.05 },
+    "aggregate_discipline": { "floor": 0.9, "maxRegression": 0.05 },
+    "query_efficiency": { "maxRegression": 0.15 }
+  }
+}

@@ -1,0 +1,57 @@
+# Unit tests and typecheck on every push. No API keys, no credits, no network.
+#
+# The agent evaluation is deliberately not run here. It costs credits per
+# interaction and needs a deployed MCP server plus two live agents, so it is a
+# local or manually-dispatched step rather than something that fires on every
+# commit. What CI protects is the measuring instrument: if a scorer or the
+# transcript parser is wrong, every experiment built on it is wrong in a way
+# that looks like a real result.
+
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Scorer and transcript-parser unit tests
+        run: npm test
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Warehouse SQL and golden answers agree
+        # Regenerating must be a no-op, and every expected answer must still be
+        # what real SQL returns over the rows the loader inserts. If either
+        # drifts, every experiment after this point is graded against a fixture
+        # that no longer describes the data.
+        run: |
+          pip install --quiet duckdb
+          python3 data/build_warehouse.py
+          python3 data/verify_sql.py
+          git diff --exit-code sql/ evals/golden.json \
+            || (echo "::error::generated SQL or golden set is stale — run 'npm run build:warehouse' and commit" && exit 1)
+
+      - name: The gate fails a regressing run
+        # The gate's job is to exit non-zero. A gate that silently exits 0 is
+        # worse than no gate, so CI asserts the failure path itself.
+        run: |
+          npx tsx evals/make_fixtures.ts
+          if npx tsx evals/gate.ts --baseline demo-baseline --candidate demo-candidate; then
+            echo "::error::gate exited 0 on a run that breaches its thresholds"
+            exit 1
+          fi
+          echo "gate correctly rejected the regressing run"
