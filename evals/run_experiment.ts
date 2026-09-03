@@ -21,7 +21,7 @@ import { configFromEnv, runAgent, type AgentRun } from "./gumloop.js";
 import { scoreRun, type GoldenCase, type Score } from "./scorers.js";
 
 const golden: { meta: Record<string, unknown>; cases: GoldenCase[] } = JSON.parse(
-  readFileSync(join(process.cwd(), "data", "golden.json"), "utf8"),
+  readFileSync(join(process.cwd(), "evals", "golden.json"), "utf8"),
 );
 
 const RUN_NAME = process.env.RUN_NAME ?? "unnamed";

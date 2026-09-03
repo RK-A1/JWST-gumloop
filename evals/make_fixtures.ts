@@ -21,7 +21,7 @@ import { answerFrom, trajectoryFrom } from "./gumloop.js";
 import { scoreRun, type GoldenCase } from "./scorers.js";
 
 const golden: { cases: GoldenCase[] } = JSON.parse(
-  readFileSync(join(process.cwd(), "data", "golden.json"), "utf8"),
+  readFileSync(join(process.cwd(), "evals", "golden.json"), "utf8"),
 );
 
 const toolPart = (toolName: string, args: object, result: unknown) => ({
