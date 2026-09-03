@@ -1,0 +1,11 @@
+node_modules/
+.dev.vars
+.env
+.wrangler/
+*.tsbuildinfo
+.DS_Store
+runs/demo-*.json
+runs/smoke.json
+
+# Screen recordings — source only, the GIF is what ships
+*.mov

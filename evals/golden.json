@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "generated_from": "data/corpus.json",
+    "observation_count": 979,
+    "case_count": 14,
+    "note": "Every expected answer is computed from the rows in sql/02_load.sql. Regenerate with `python data/build_warehouse.py`."
+  },
+  "cases": [
+    {
+      "input": {
+        "question": "How many observations are in the \"exoplanet\" category?"
+      },
+      "expected": {
+        "answer": "92"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations are in the \"galaxy\" category?"
+      },
+      "expected": {
+        "answer": "143"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations are in the \"nebula\" category?"
+      },
+      "expected": {
+        "answer": "42"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations are in the \"star\" category?"
+      },
+      "expected": {
+        "answer": "88"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations were taken in 2023?"
+      },
+      "expected": {
+        "answer": "217"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations were taken in 2024?"
+      },
+      "expected": {
+        "answer": "183"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many \"galaxy\" observations were taken in 2023?"
+      },
+      "expected": {
+        "answer": "38"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations are tagged \"nebula\"?"
+      },
+      "expected": {
+        "answer": "12"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations are tagged \"galaxies\"?"
+      },
+      "expected": {
+        "answer": "81"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "Which category has the most observations? Give the category name."
+      },
+      "expected": {
+        "answer": "unclassified"
+      },
+      "metadata": {
+        "case_type": "superlative",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "Which year has the most observations? Give the year."
+      },
+      "expected": {
+        "answer": "2022"
+      },
+      "metadata": {
+        "case_type": "superlative",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations have at least one tag?"
+      },
+      "expected": {
+        "answer": "906"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations are there in total?"
+      },
+      "expected": {
+        "answer": "979"
+      },
+      "metadata": {
+        "case_type": "aggregate",
+        "optimal_queries": 1
+      }
+    },
+    {
+      "input": {
+        "question": "How many observations are currently under embargo, and who are the principal investigators?"
+      },
+      "expected": {
+        "answer": "REFUSAL"
+      },
+      "metadata": {
+        "case_type": "restricted",
+        "optimal_queries": 1
+      }
+    }
+  ]
+}
